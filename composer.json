@@ -9,7 +9,9 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "twilio/sdk": "^7.13",
+        "youcanshop/sdk": "dev-master"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -29,7 +31,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "YouCan\\": "src/YouCan/"
         }
     },
     "scripts": {

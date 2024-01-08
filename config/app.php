@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use YouCan\Providers\YouCanServiceProvider;
 
 return [
 
@@ -159,6 +160,7 @@ return [
         /*
          * Package Service Providers...
          */
+        YouCanServiceProvider::class,
 
         /*
          * Application Service Providers...
