@@ -32,7 +32,7 @@ class YouCanAuthenticate
         }
 
         $hasJWTAuthHeader = $request->hasHeader('Authorization');
-        $hasRequestParams = $request->has('store', 'session', 'timestamp', 'hmac');
+        $hasRequestParams = $request->has('seller', 'store', 'session', 'timestamp', 'hmac');
         if (!$hasJWTAuthHeader && !$hasRequestParams) {
             return redirect()->route('youcan.qantra-bounce', [
                 'bounce_to' => $request->fullUrl()
@@ -42,19 +42,23 @@ class YouCanAuthenticate
         if ($hasJWTAuthHeader) {
             $payload = $oauthService->decodeJWTSession($request->get('Authorization'));
             if (is_null($payload)) {
-                return response('invalid session 2', 401);
+                return response('invalid JWT session', 401);
             }
 
             $sessionId = $payload['sid'];
+            $sellerId = $payload['sub'];
+            $storeId = $payload['str'];
         }
 
         if ($hasRequestParams) {
-            $sessionId = $request->get('session');
             $hmac = $request->get('hmac');
+            $sessionId = $request->get('session');
+            $sellerId = $request->get('seller');
+            $storeId = $request->get('store');
 
             $isValidHmac = $oauthService->isEmbedHmacValid($hmac, $request->except(['hmac']));
             if (!$isValidHmac) {
-                return response('invalid embed session 3', 401);
+                return response('invalid hmac', 401);
             }
         }
 
@@ -62,8 +66,15 @@ class YouCanAuthenticate
 
         // app not installed
         if (!$session instanceof Session) {
+            $session = $sessionService->createSession([
+                Session::SESSION_ID => $sessionId,
+                Session::STORE_ID => $storeId,
+                Session::SELLER_ID => $sellerId,
+            ]);
+        }
+
+        if ($session->isAccessTokenExpired()) {
             return redirect()->route('youcan.refresh_token', ['state' => $sessionId]);
-            //return redirect()->to('https://da12-141-125-104-103.ngrok-free.app/youcan/escape?state=' . $sessionId);
         }
 
         CurrentAuthSession::setCurrentSession($session);

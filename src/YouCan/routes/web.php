@@ -1,7 +1,6 @@
 <?php
 
 use YouCan\Http\Controllers\CallbackController;
-use YouCan\Http\Controllers\HomeController;
 use YouCan\Http\Controllers\QantraBounceController;
 use YouCan\Http\Controllers\TokenRefreshController;
 use YouCan\Http\Middleware\YouCanAuthenticate;

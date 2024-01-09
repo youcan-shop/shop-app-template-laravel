@@ -14,7 +14,7 @@ class Session extends Model
     public const SELLER_ID = 'seller_id';
     public const ACCESS_TOKEN = 'access_token';
     public const REFRESH_TOKEN = 'refresh_token';
-    public const EXPIRES_AT = 'expire_at';
+    public const EXPIRES_AT = 'expires_at';
 
     protected $table = self::TABLE;
     protected $guarded = [];
@@ -50,6 +50,16 @@ class Session extends Model
     public function getRefreshToken(): ?string
     {
         return $this->getAttribute(self::REFRESH_TOKEN);
+    }
+
+    public function isAccessTokenExpired(): bool
+    {
+        return is_null($this->getExpireAt()) || $this->getExpireAt()->lessThan(Carbon::now());
+    }
+
+    public function isAccessTokenValid(): bool
+    {
+        return $this->isAccessTokenExpired() === false;
     }
 
     public function getExpireAt(): ?Carbon

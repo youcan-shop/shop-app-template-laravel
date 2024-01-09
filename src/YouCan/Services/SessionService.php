@@ -22,6 +22,8 @@ class SessionService
                 Session::ACCESS_TOKEN,
                 Session::REFRESH_TOKEN,
                 Session::EXPIRES_AT,
+                Session::SELLER_ID,
+                Session::STORE_ID,
             ]));
     }
 
@@ -33,6 +35,8 @@ class SessionService
                 Session::ACCESS_TOKEN,
                 Session::REFRESH_TOKEN,
                 Session::EXPIRES_AT,
+                Session::SELLER_ID,
+                Session::STORE_ID,
             ]));
     }
 }

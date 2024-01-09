@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use YouCan\Http\Middleware\YouCanAuthenticate;
+use YouCan\Http\Middleware\YouCanCSPHeaders;
 use YouCan\Services\CurrentAuthSession;
 
 /*
@@ -16,4 +18,4 @@ use YouCan\Services\CurrentAuthSession;
 
 Route::get('/', function () {
     return CurrentAuthSession::getCurrentSession();
-});
+})->middleware([YouCanAuthenticate::class, YouCanCSPHeaders::class]);

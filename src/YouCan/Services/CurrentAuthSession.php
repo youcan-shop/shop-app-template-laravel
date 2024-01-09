@@ -10,7 +10,7 @@ use YouCan\Models\Session;
  */
 class CurrentAuthSession
 {
-    private static ?Session $session;
+    private static ?Session $session = null;
 
     public static function getCurrentSession(): Session
     {

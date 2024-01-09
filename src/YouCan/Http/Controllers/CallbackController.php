@@ -3,6 +3,7 @@
 namespace YouCan\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use YouCan\Models\Session;
 use YouCan\Services\OAuthService;
 use YouCan\Services\SessionService;
@@ -37,20 +38,19 @@ class CallbackController extends Controller
         }
 
         $attributes = [
-            'access_token' => $authData['access_token'],
-            'refresh_token' => $authData['refresh_token'],
-            'expires_at' => $authData['expires_in'],
+            Session::ACCESS_TOKEN => $authData['access_token'],
+            Session::REFRESH_TOKEN => $authData['refresh_token'],
+            Session::EXPIRES_AT => Carbon::now()->addSeconds($authData['expires_in']),
+
         ];
 
         $session = $this->sessionService->findSession($sessionId);
 
         if (!$session instanceof Session) {
-            $session = $this->sessionService->createSession(array_merge(['session_id' => $sessionId], $attributes));
+            $this->sessionService->createSession(array_merge(['session_id' => $sessionId], $attributes));
         } else {
             $this->sessionService->updateSession($session->getId(), $attributes);
         }
-
-        $this->oauthService->subscribeToResthook($session, 'order.create', route('youcan.webhook'));
 
         return redirect('/');
     }

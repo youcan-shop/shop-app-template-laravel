@@ -118,7 +118,7 @@ class OAuthService
     {
         $config = OAuthConfig::createFromLaravelConfig();
 
-        $decoded = JWT::decode($jwt, $config->getClientSecret());
+        $decoded = JWT::decode($jwt, $config->getClientSecret(), false);
 
         return (array)$decoded;
     }
