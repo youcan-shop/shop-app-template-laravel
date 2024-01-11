@@ -5767,12 +5767,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/youcan-shop/youcan-shop-php-sdk.git",
-                "reference": "e60bcd1593e008d5624aaff5b8d37b37676a5eff"
+                "reference": "0d9322fdc5245ab18e0dde9c72e2a86bff7093f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/youcan-shop/youcan-shop-php-sdk/zipball/e60bcd1593e008d5624aaff5b8d37b37676a5eff",
-                "reference": "e60bcd1593e008d5624aaff5b8d37b37676a5eff",
+                "url": "https://api.github.com/repos/youcan-shop/youcan-shop-php-sdk/zipball/0d9322fdc5245ab18e0dde9c72e2a86bff7093f2",
+                "reference": "0d9322fdc5245ab18e0dde9c72e2a86bff7093f2",
                 "shasum": ""
             },
             "require": {
@@ -5803,7 +5803,7 @@
                 "issues": "https://github.com/youcan-shop/youcan-shop-php-sdk/issues",
                 "source": "https://github.com/youcan-shop/youcan-shop-php-sdk/tree/master"
             },
-            "time": "2024-01-06T10:47:12+00:00"
+            "time": "2024-01-09T10:08:27+00:00"
         }
     ],
     "packages-dev": [
