@@ -40,7 +40,7 @@ class YouCanAuthenticate
         }
 
         if ($hasJWTAuthHeader) {
-            $payload = $oauthService->decodeJWTSession($request->get('Authorization'));
+            $payload = $oauthService->decodeJWTSession($request->headers->get('Authorization'));
             if (is_null($payload)) {
                 return response('invalid JWT session', 401);
             }
