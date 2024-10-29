@@ -1,0 +1,10 @@
+{
+    "name": "laravel",
+    "roles": [
+        "client",
+        "server"
+    ],
+    "commands": {
+        "dev": "composer run dev"
+    }
+}
